@@ -1,0 +1,28 @@
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 100%;
+}
+
+body{
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    
+    
+}
+
+button{
+    cursor: pointer;
+}
+
+button{
+    cursor: default;
+}
+
+.is-active{
+    font-weight: bold;
+}

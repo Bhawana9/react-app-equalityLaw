@@ -1,0 +1,29 @@
+.box-layout{
+    align-items:center;
+    background: url('/images/bgdone.jpeg');
+    display:flex;
+    height:100vh;
+    border: 1px solid;
+    justify-content: center;
+    
+    background-position: center center;
+    width:100vw;
+    padding-top: 66,64%; 
+}
+
+.box-layout__box{
+    background:fade-in($color: #000000, $amount: 0.15);
+    border-radius: 3px;
+    padding: 0.2rem;
+    text-align: center;
+    height:15rem;
+    width: 60rem;
+
+}
+
+.box-layout__title{
+    margin: 1.6rem;
+    line-height: 1;
+
+
+}
