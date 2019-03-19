@@ -26,6 +26,9 @@ switch (action.type)
             return complaints;
         };
     });
+
+    case 'SET_COMPLAINTS':
+    return action.complaints;
      
     default:
     return state;

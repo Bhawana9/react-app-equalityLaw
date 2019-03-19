@@ -6,7 +6,7 @@ export default(complaints,{text,sortBy,startDate,endDate})=>{
         const createdAtMoment=moment(complaints.createdAt)
         const startDateMatch=startDate ? startDate.isSameOrBefore(createdAtMoment,'day'):true;
         const endDateMatch=endDate ? endDate.isSameOrAfter(createdAtMoment,'day'):true;
-        const textMatch=complaints.description.toLowerCase().includes(text.toLowerCase());
+        const textMatch=complaints.description.toLowerCase().includes(text.trim().toLowerCase());
 
 
         return startDateMatch&&endDateMatch&&textMatch;

@@ -1,0 +1,70 @@
+.list-header {
+  background: white;
+  border: 1px solid darken(white, 7%);
+  color: grey;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2.6rem;
+}
+
+.list-body {
+  margin-bottom: 2.6rem;
+
+  @media (min-width: $desktop-breakpoint) {
+    margin-bottom: 3.6rem;
+  }
+}
+
+.list-item {
+  border: 1px solid darken(white, 7%);
+  border-top: none;
+  color: grey;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  text-decoration: none;
+  transition: background .3s ease;
+
+  &:hover {
+    background: white;
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2.4rem;
+  }
+
+  &__title {
+    margin: 0;
+    word-break: break-all; // prevent long word from breaking the list
+  }
+
+  &__sub-title {
+    color: grey;
+    font-size: 1rem;
+  }
+
+  &__amount {
+    margin: $s-size 0 0 0;
+
+    @media (min-width: $desktop-breakpoint) {
+      margin: 0;
+      padding-left: 1rem; 
+    }
+  }
+
+ 
+  &--message {
+    align-items: center;
+    color:red;
+    font-size:1rem;
+    justify-content: center;
+    padding: 2.6rem;
+
+    &:hover {
+      background: none;
+    }
+  }
+}

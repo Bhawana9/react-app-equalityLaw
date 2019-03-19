@@ -2,6 +2,7 @@ import React from 'react';
 import ComplaintsForm from './ComplaintsForm'
 import {connect} from 'react-redux';
 import {startAddComplaints} from '../actions/complaints'
+import {MDBCard, MDBCol, MDBCardTitle, MDBContainer } from 'mdbreact';
 
 
 export class  AddComplaint extends React.Component
@@ -12,11 +13,21 @@ export class  AddComplaint extends React.Component
   };
   render(){
   return( 
-<div>
-<h2 className="mb-4">File Complaints!!Raise your Voice</h2>       
-  <ComplaintsForm
+<MDBContainer>
+  <MDBCol md="6" >
+  
+  <MDBCard style={{width:"30rem", marginTop:"1rem"}}color="success-color" text="white" className="text-center">
+  
+  
+  </MDBCard>
+  
+  </MDBCol>
+   <MDBCardTitle>  
+     <ComplaintsForm
   onSubmit={this.onSubmit}/>
-  </div>
+  </MDBCardTitle>   
+  
+  </MDBContainer>
 );
 }
 }  

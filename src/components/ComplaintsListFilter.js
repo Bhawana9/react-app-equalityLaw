@@ -1,8 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {DateRangePicker} from 'react-dates'
-import {setTextFilter, sortByDepartment,setStartDate,setEndDate} from '../actions/filters'
-import {sortByDate} from '../actions/filters'
+import {setTextFilter, sortByDepartment,sortByDate,setStartDate,setEndDate} from '../actions/filters'
+import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
+
 
 class ComplaintsListFilter extends React.Component{
     state={
@@ -21,7 +22,7 @@ class ComplaintsListFilter extends React.Component{
         this.props.setTextFilter(e.target.value);
         };
 
-    onSelectChange=(e)=>{
+    onSortChange=(e)=>{
         if(e.target.value==='date')
         {
             this.props.sortByDate();
@@ -37,32 +38,48 @@ class ComplaintsListFilter extends React.Component{
             <div className="content-container">
             <div className="input-group">
              <div className="input-group__item">
-             <input type="text" className="text-input"
-            value={this.props.filters.text} 
+             <MDBCol md="12" >
+             <MDBFormInline className="md-form">
+             <MDBIcon icon="search"/>
+             
+             <input type="text" className="form-control form-control-sm ml-1 w-75"
+            value={this.props.filters.text} placeholder="Search Complaints" aria-label="Search Complaints"
             onChange={this.onTextChange}/>
-
-             </div>
-             <div className="input-group__item">
-             <select 
-        value ={this.props.filters.sortBy}
-        onChange={this.onSelectChange}>
+            </MDBFormInline>
+</MDBCol>
+         </div>
+        <div className="input-group__item">
+        <MDBCol md="12">
+        <MDBFormInline className="md-form">
+        <select className="form-control form-control-sm ml-1 w-80"
+        value ={this.props.filters.sortBy} placeholder="SortBy" 
+        onChange={this.onSortChange}>
         <option value="date">Date</option>  
         <option value="department">Department</option>  
             </select>
+            </MDBFormInline>
+            </MDBCol>
              </div>
-
-             <div className="input-group__item">         
-        <DateRangePicker
+             
+        <div className="input-group__item">
+        <MDBCol md="20">
+        <MDBFormInline className="md-form">    
+        <DateRangePicker 
         startDate={this.props.filters.startDate}
         endDate={this.props.filters.endDate}
+        startDateId="startDate"
+        endDateId="endDate"
         onDatesChange={this.onDatesChange}
         focusedInput={this.state.calendarFocused}
         onFocusChange={this.onFocusChange}
         showClearDates={true}
         numberOfMonths={1}
         isOutsideRange={()=> false}
+        showDefaultInputIcon
+        hideKeyboardShortcutsPanel
         /> 
-
+ </MDBFormInline>
+            </MDBCol>
              </div>
             </div>     
               

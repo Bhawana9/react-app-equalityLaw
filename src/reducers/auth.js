@@ -4,7 +4,8 @@ switch(action.type)
 {
     case 'LOGIN':
     return{
-      uid:action.uid
+      uid:action.uid,
+      firstname:action.firstname
     };
     case 'LOGOUT':
     return {};

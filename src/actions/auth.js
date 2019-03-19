@@ -2,9 +2,10 @@ import {firebase,googleAuthProvider,facebookAuthProvider} from '../firebase/fire
 import handleAuthError from'./handleautherror';
 import {setComplaints} from'./complaints'
 
-export const login=(uid)=>({
+export const login=(uid,firstname)=>({
 type:'LOGIN',
-uid
+uid,
+firstname
 })
 
 export const startGoogleLogin=()=>{

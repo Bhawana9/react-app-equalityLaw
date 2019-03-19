@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 ///import './index.css';
 import './styles/styles.scss';
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 import 'normalize.css/normalize.css';
 import App ,{history} from './App';
 import * as serviceWorker from './serviceWorker';
@@ -12,17 +14,21 @@ import 'react-dates/lib/css/_datepicker.css';
 import {startSetComplaints} from './actions/complaints'
 import {firebase} from './firebase/firebase';
 import {login,logout} from './actions/auth'
-
+import LoadingPage from './components/LoadingPage'
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const store=configureStore();
 const jsx=(
     <Provider store={store}>
      <Router>
+        
      <App/>
      </Router> 
     </Provider>
    
 );
+
+//avoid re-rendering
 let hasRendered=false;
 const renderApp=()=>{
 
@@ -32,13 +38,14 @@ const renderApp=()=>{
         hasRendered=true;
     }
 };
-ReactDOM.render(<p>Loading .....</p>, document.getElementById('root'));
+ReactDOM.render(<LoadingPage/>, document.getElementById('root'));
 
 
 firebase.auth().onAuthStateChanged((user)=>{
 if(user)
 {
-    store.dispatch(login(user.uid));
+    const firstname=user.displayName.split('')[0];
+    store.dispatch(login(user.uid,firstname));
     store.dispatch(startSetComplaints()).then(()=>{
         renderApp();
         if(history.location.pathname==='/'){

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ComplaintsList from './ComplaintsList';
 import ComplaintsListFilter from './ComplaintsListFilter'
-import { ComplaintsSummary } from './ComplaintsSummary';
+import Chart from './Chart';
+
 export default class Dashboard extends Component
    {
     
@@ -10,14 +11,12 @@ export default class Dashboard extends Component
      {
          return(
        
-       <div className="title-area">
-       <p className="site-title" itemProp="headline">
-       STOP OFFICE HARASSMENT
-       </p>
-       
+       <div >
+        
+       <Chart/>
        <ComplaintsListFilter/>
        <ComplaintsList/>
-       
+            
        </div>
 
         

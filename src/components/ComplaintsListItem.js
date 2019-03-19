@@ -1,23 +1,31 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import moment from 'moment';
+import { MDBCard, MDBTable, MDBTableBody } from "mdbreact";
+import { InputLabel } from '@material-ui/core';
 
- const ComplaintsListItem=({id,employeeName,description ,age,sex,Commitername,CommiterPosition,department,createdAt})=>(
-<div>
-    <Link to={`/edit/${id}`}> <h3>{description}</h3></Link>
-   <h3>{employeeName}</h3>
-   <h3>{age}</h3>
-   <h3>{sex}</h3>
-   <p>{department} - {createdAt}</p>
-    <p>{Commitername}-{CommiterPosition}</p>
-    
+ const ComplaintsListItem=({id,employeeName,description ,age,sex,Commitername,CommiterPosition,department,note,createdAt})=>(
+  
+    <MDBCard>
      
-</div>
+         <MDBTable>
+         <MDBTableBody>
+    <Link className="list-item"to={`/edit/${id}`}> 
+     <div>
+    
+    <td className="list-item__title"><InputLabel>{description}</InputLabel></td> 
+    <span >{moment(createdAt).format('MMMM Do,YYYY')}</span>
+    </div>
+    <td className="list-item__title" ><InputLabel>{employeeName}</InputLabel></td> 
+    <td className="list-item__data" ><InputLabel>{department}</InputLabel></td> 
+
+    </Link>
+    </MDBTableBody>
+    </MDBTable>
+    </MDBCard>
+     
+
 );
 
-const mapStateToProps=(state)=>{
-    return{
-        removeComplaints:state.removeComplaints
-    };
-};
-export default connect(mapStateToProps)(ComplaintsListItem);
+
+export default ComplaintsListItem;

@@ -3,31 +3,49 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.4.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
+    "bootstrap-table": "^1.14.1",
+    "chart.js": "^2.8.0",
+    "express": "^4.15.4",
     "firebase": "^4.2.0",
+    "fusioncharts": "^3.13.4",
+    "google-map-react": "^1.1.2",
     "history": "^4.7.2",
     "material-auto-rotating-carousel": "^3.0.1",
+    "material-ui-filter": "^2.1.14",
+    "mdbreact": "^4.11.0",
     "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "numeral": "^2.0.6",
     "react": "^16.8.4",
     "react-addons-shallow-compare": "^15.6.0",
+    "react-admin": "^2.8.1",
     "react-animated-slider": "^1.1.4",
+    "react-awesome-modal": "^2.0.5",
+    "react-chartjs-2": "^2.7.4",
     "react-dates": "^12.7.0",
     "react-dom": "^16.8.4",
     "react-image-gallery": "^0.8.14",
+    "react-modal": "^3.8.1",
     "react-redux": "^5.0.5",
     "react-scripts": "2.1.8",
+    "react-stripe-checkout": "^2.6.3",
+    "react-stripe-elements": "^2.0.3",
     "react-swipeable-views": "^0.13.1",
+    "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.2.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "webpack-cli": "^3.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,11 +58,16 @@
   ],
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.1",
     "node-sass": "^4.11.0",
     "react-dev-utils": "^8.0.0",
     "redux-devtools": "^3.5.0",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "webpack-merge": "^4.2.1",
+    "@storybook/react": "^5.0.3",
+    "@storybook/addon-actions": "^5.0.3",
+    "@storybook/addon-links": "^5.0.3"
   }
 }

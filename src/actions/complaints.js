@@ -1,8 +1,8 @@
 import database from '../firebase/firebase'
 
+
 //Add Complaints
 export const addComplaints =(complaints)=>({
- 
 type:'ADD_COMPLAINTS',
 complaints
 });

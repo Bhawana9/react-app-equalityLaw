@@ -2,10 +2,12 @@
  import moment from 'moment'
  import {SingleDatePicker} from 'react-dates'
  import 'react-dates/lib/css/_datepicker.css';
-
- 
+ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBCard, MDBCardBody, MDBFormInline } from 'mdbreact';
+ import Select from '@material-ui/core/Select'
+import { InputLabel, MenuItem } from '@material-ui/core';
+import {isInclusivelyAfterDay} from 'react-dates'
  export default class ComplaintsForm extends Component {
-
+  
     constructor(props)
     {
         super(props);
@@ -20,19 +22,20 @@
     createdAt:props.complaints ? moment(props.complaints.createdAt):moment(),
     note:props.complaints ? props.complaints.note:'', 
     calendarFocused:false,
-    error:''
+    errorEmployee:'',
+    errorDescription:'',
+    errorDepartment:'',
+    errorCommitername:''
+    
    };
 }
 
-componentWillReceiveProps(newProps) {
-  if (newProps.errors) {
-    this.setState({ errors: newProps.errors });
-  }
-}
+
    onDescriptionChange=(e)=>{
    const description=e.target.value
    this.setState(()=>({description}));
    };
+
    onNameChange=(e)=>{
     const employeeName=e.target.value
     this.setState(()=>({employeeName}));
@@ -48,7 +51,7 @@ componentWillReceiveProps(newProps) {
    handleOptionChange=(e)=> {
      const sex=e.target.value;
       
-    this.setState(()=>({sex}));  
+    this.setState(()=>({sex:sex}));  
   
   }
 
@@ -83,18 +86,49 @@ componentWillReceiveProps(newProps) {
     this.setState(()=>({calendarFocused:focused}));
       }
 
+      handleClickOpen=()=>{
+        this.setState({open:true});
+      } 
+
+      handleClose=()=>{
+        this.setState({open:false});
+      }
+
    onSubmit=(e)=>{
        e.preventDefault();
 
        if(!this.state.employeeName||!this.state.description|| !this.state.department || !this.state.Commitername){
-       //Set error state
+       if(!this.state.employeeName)
+       {
+        this.setState(()=>({
+          errorEmployee:'Please provide employee name to file complaints'
+       }));
+       }
+       if(!this.state.description)
+       {
        this.setState(()=>({
-           error:'Please provide the details to file complaints'
+           errorDescription:'Please provide the description to file complaints'
         }));
        }
+
+       if(!this.state.department)
+       {
+        this.setState(()=>({
+          errorDepartment:'Please provide department to file complaints'
+       }));
+       }
+
+        if(!this.state.Commitername)
+       {
+        this.setState(()=>({
+          errorCommitername:'Please provide CommiterName to file complaints'
+       }));
+       }
+      }
        else
        {
-        this.setState(()=>({error:''}));
+        this.setState(()=>({errorDescription:'',errorEmployee:'',errorDepartment:'',errorCommitername:''}));
+
         this.props.onSubmit({
         employeeName:this.state.employeeName,
         description:this.state.description,
@@ -110,54 +144,92 @@ componentWillReceiveProps(newProps) {
    };   
 
      render() {
-      const { errors } = this.state;    
+         
          return (
-     <div className="container">
-             
-    {this.state.error&&<p>{this.state.error}</p>}
+   
+     <MDBContainer>
+       
+       <MDBRow>
+         <MDBCol md="12">
+         <div className="w-25 p-3">
+         <MDBCard
+         className="card-image"
+         style={{backgroundImage:"url('./images/card1.jpg')",
+         width:"30rem"}}>
+           <MDBCardBody>
+     <form className="form "onSubmit={this.onSubmit}> 
+    
+     <h3 className="black-text mb-5 mt-4 font-weight-bold"><strong>#ME TOO FORM</strong> </h3>
+     <div className="grey-text ">
 
-    <form onSubmit={this.onSubmit}> 
-     Name of an employee <input type="text" placeholder="Employee Name"  value={this.state.employeeName} onChange={this.onNameChange}/><br/>
-     Description of an Incident<textarea placeholder="description of incident" autoFocus value={this.state.description} onChange={this.onDescriptionChange}></textarea><br/>
-     Sex <div className="radio">
-          <label>
-            <input type="radio" value="male" checked={this.state.sex === 'male'} onChange={this.handleOptionChange}/>Male
-          </label>
-          <label>
-            <input type="radio" value="female" checked={this.state.sex=== 'female'} onChange={this.handleOptionChange}/>Female
-            </label>
-        </div><br/>
-Age <input type="number" placeholder="age"  value={this.state.age} onChange={this.onAgeChange}/><br/>
-    Department List:
-        <select
-                value={this.state.department}
+      {this.state.errorEmployee && <p className="form__error">{this.state.errorEmployee}</p>}
+    <MDBInput type="text" icon="user" label="Your name"  autoFocus className={this.state.errorEmployee ?"text-input text-input__error":"text-input"} value={this.state.employeeName} onChange={this.onNameChange}/>
+     
+     {this.state.errorDescription && <p className="form__error">{this.state.errorDescription}</p>}
+    <MDBInput type="text"  icon="pencil-alt" label=" Description of an Incident"  className={this.state.errorDescription ?"text-input text-input__error":"text-input"} value={this.state.description} onChange={this.onDescriptionChange}/>
+   
+    <MDBFormInline>
+      
+        <label><MDBInput gap  type="radio" value="male"icon="male"label="Male" checked={this.state.sex === 'male'?true :false} onChange={this.handleOptionChange}/></label> 
+        <label><MDBInput gap type="radio"value="female"  icon="female" label="Female"checked={this.state.sex=== 'female'?true:false} onChange={this.handleOptionChange}/></label> 
+          
+        </MDBFormInline>
+<MDBInput type="number" icon="id-badge"label="age"  value={this.state.age}  className="text-input" onChange={this.onAgeChange}/>
+
+ 
+ 
+  <InputLabel>Department</InputLabel>
+      <Select  style={{width:300,border:'1px'}} value={this.state.department}
                 onChange={this.handleSelectValue}
-                className="form-control"
+                showDefaultInputIcon        
+                >
+                                  
+                <MenuItem value="IT Services">IT Services</MenuItem>
+                <MenuItem value="HR and Payroll">HR and Payroll</MenuItem>
+                <MenuItem value="Admin Department">Admin Department</MenuItem>
+                <MenuItem  value="Sales and Marketing">Sales and Marketing</MenuItem>
+                <MenuItem value="Security and Transport">Security and Transport</MenuItem>
+                <MenuItem value="Infrastructures">Infrastructures</MenuItem>
+                <MenuItem value="Others">Others</MenuItem>
                 
-              >
-                <option value="IT Services">IT Services</option>
-                <option value="HR and Payroll">HR and Payroll</option>
-                <option value="Admin Department">Admin Department</option>
-                <option value="Sales and Marketing">Sales and Marketing</option>
-                <option value="Security and Transport">Security and Transport</option>
-                <option value="Infrastructures">Infrastructures</option>
-                <option value="Others">Others</option>
-              </select><br/><br/>
-Date of Incident: 
+                </Select>
+                
+           <br/>
+          <br/> 
+         
+                
 <SingleDatePicker 
 date ={this.state.createdAt}
 onDateChange={this.onDateChange}
 focused={this.state.calendarFocused}
 onFocusChange={this.onFocusChange}
 numberOfMonths={1}
-isOutsideRange={()=> false}/> <br/>             
-Name of the person you committed harassment <input type="text" placeholder="Commiter's Name"  value={this.state.Commitername} onChange={this.onCommiterNameChange}/><br/>        
-Position of the Committed Person <input type="text" placeholder="Commiter's Position"  value={this.state.CommiterPosition} onChange={this.onCommiterPositionChange}/><br/> 
-Any other Notes: <textarea placeholder="optional notes"  value={this.state.note} onChange={this.onNoteChange} error={errors.text}></textarea><br/> 
-<button action="submit" label="submit">ADD COMPLAINT</button>             
-             </form> 
-             </div>
+isOutsideRange={day=> isInclusivelyAfterDay(day,moment().add(1,'days'))}
+showDefaultInputIcon
+hideKeyboardShortcutsPanel
+block
+/>
+ 
+ {this.state.errorCommitername&& <p className="form__error">{this.state.errorCommitername}</p>}      
+<MDBInput type="text" icon="user-tie"label="Commiter's Name"  className={this.state.errorCommitername?"text-input text-input__error":"text-input"}  value={this.state.Commitername} onChange={this.onCommiterNameChange}/>       
+<MDBInput type="text" icon="industry" label="Commiter's Position"  className="text-input" value={this.state.CommiterPosition} onChange={this.onCommiterPositionChange}/> 
+<MDBInput type="textarea"  icon ="notes-medical" label="Add any important notes(optional)"  className="textarea" value={this.state.note} onChange={this.onNoteChange} />
+<div ><button className="btn btn-success" action="submit" label="submit">SAVE COMPLAINT</button> </div> 
+
+            </div>
+             </form>
             
+             </MDBCardBody>
+             </MDBCard> 
+             </div>
+             </MDBCol>
+             </MDBRow>
+            
+             </MDBContainer>
+             
+            
+             
+                      
          )
      }
  }
