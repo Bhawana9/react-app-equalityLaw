@@ -5,7 +5,7 @@ Name: Bhawana Sharma
 ## Overview.
 Harassment App: It�s a harassment or equality law app where user can lodge a complaint against any harassment that happened in their office either by co-workers or by another person.
 
- . . . . . List of user features (excluding user registration and authentication)
+ ##List of user features (excluding user registration and authentication)
   
 Login using Gmail and Facebook account (integration with firebase)
 Add Complaints
@@ -33,7 +33,7 @@ I have used firebase Realtime database, firebase authentication and Redux to man
 ![DataModel](Data-model.jpg)
 
 ## UI Design.
-![Screen](screen.jpg)
+![Screen](Screen.jpg)
 
 
 ##Data Flow-Redux
@@ -45,12 +45,12 @@ I have used firebase Realtime database, firebase authentication and Redux to man
 List each route supported and state the associated view  
 
 + / - Display Login page (main page of the website)
-+ /dashboard � Display the list of complaints
++ /dashboard-Display the list of complaints
 + /create- Display Add Complaint Form (Me too Form)
 + /edit/id- detail view of a particular complaints and either edit or remove the complaints(:id)
 + /donate-Display the donate page (Stripe API for payment)
 + /about-Display the vision, mission and goals
-+ /help- Display FAQ�s 
++ /help- Display FAQ's 
 + /contact-Display Google Map and Contact details
 + /404-Display Error when page not found
 
