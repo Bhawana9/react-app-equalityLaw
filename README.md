@@ -3,7 +3,7 @@
 Name: Bhawana Sharma
 
 ## Overview.
-Harassment App: It’s a harassment or equality law app where user can lodge a complaint against any harassment that happened in their office either by co-workers or by another person.
+Harassment App: Itï¿½s a harassment or equality law app where user can lodge a complaint against any harassment that happened in their office either by co-workers or by another person.
 
  . . . . . List of user features (excluding user registration and authentication)
   
@@ -30,32 +30,32 @@ Logout
 I have used firebase Realtime database, firebase authentication and Redux to manage the dataflow.
 
 ## Data Model Design.
-
+![DataModel](Data-model.jpg)
 
 ## UI Design.
+![Screen](screen.jpg)
 
 
-
-Data Flow-Redux
-
+##Data Flow-Redux
+![Data-flow-Redux](data-flow-redux.jpg)
 
 
 
 ## Routing.
-. . . . List each route supported and state the associated view  
+List each route supported and state the associated view  
 
 + / - Display Login page (main page of the website)
-+ /dashboard – Display the list of complaints
++ /dashboard ï¿½ Display the list of complaints
 + /create- Display Add Complaint Form (Me too Form)
 + /edit/id- detail view of a particular complaints and either edit or remove the complaints(:id)
 + /donate-Display the donate page (Stripe API for payment)
-+/about-Display the vision, mission and goals
-+/help- Display FAQ’s 
-+/contact-Display Google Map and Contact details
-+/404-Display Error when page not found
++ /about-Display the vision, mission and goals
++ /help- Display FAQï¿½s 
++ /contact-Display Google Map and Contact details
++ /404-Display Error when page not found
 
 
-Specify which, if any, of the above routes are protected (require login)
+##Specify which, if any, of the above routes are protected (require login)
 1.Dashboard Page
 2.Edit Page
 3.Add Complaints Page
